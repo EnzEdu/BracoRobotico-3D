@@ -88,9 +88,9 @@ void init(void)
 void keyboard(unsigned char key, int x, int y) 
 {
     switch (key) {
+
         // lowerCase = sentido horario
         // upperCase = sentido anti-horario
-
         case 'o':          ombro = (ombro - 5) % 360;               break;
         case 'O':          ombro = (ombro + 5) % 360;               break;
         case 'c':       cotovelo = (cotovelo - 5) % 360;            break;
@@ -108,7 +108,9 @@ void keyboard(unsigned char key, int x, int y)
         case 'y':     rotacaoDDD = (rotacaoDDD - 5) % 360;          break;
         case 'Y':     rotacaoDDD = (rotacaoDDD + 5) % 360;          break;
 
-        case ESC: exit(EXIT_SUCCESS); break;                // Sai do programa
+
+        // Sai do programa
+        case ESC: exit(EXIT_SUCCESS);                               break;
     }
 
     glutPostRedisplay();
@@ -150,7 +152,6 @@ void display(void)
         // Rotacao 3D
         glRotatef((GLfloat) rotacaoDDD, 0.0, 1.0, 0.0);
 
-
         // Base
         glPushMatrix();
             glTranslatef(0.0, -2.0, 0.0);
@@ -171,10 +172,10 @@ void display(void)
         // Movimento do braco
         glPushMatrix();
 
-            // Ajuste do ponto de origem do braco
-            glTranslatef (0.0, -1.0, 0.0);  // origem posicionada no ombro
+            // Ajuste do ponto de origem
+            glTranslatef (0.0, -1.0, 0.0);  // Origem no ombro
             glRotatef ((GLfloat) ombro, 0.0, 0.0, 1.0);
-            glTranslatef (0.0, 1.0, 0.0);   // origem posicionada no centro do braco
+            glTranslatef (0.0, 1.0, 0.0);   // Origem no centro do braco
 
                 // Braco
                 glPushMatrix();
@@ -195,10 +196,10 @@ void display(void)
                 // Movimento do antebraco
                 glPushMatrix();
 
-                    // Ajuste do ponto de origem do antebraco
-                    glTranslatef (0.0, 1.0, 0.0);   // Origem posicionada no cotovelo
+                    // Ajuste do ponto de origem
+                    glTranslatef (0.0, 1.0, 0.0);   // Origem no cotovelo
                     glRotatef ((GLfloat) cotovelo, 0.0, 0.0, 1.0);
-                    glTranslatef (0.0, 1.0, 0.0);   // Nova origem posicionada no cotovelo
+                    glTranslatef (0.0, 1.0, 0.0);   // Nova origem no cotovelo
 
                     // Antebraco
                     glPushMatrix();
@@ -219,7 +220,7 @@ void display(void)
                     // Movimento da mao
                     glPushMatrix();
 
-                        // Ajuste do ponto de origem da mao
+                        // Ajuste do ponto de origem
                         glTranslatef(0.0, 1.0, 0.0);
                         glRotatef((GLfloat) mao, 0.0, 0.0, 1.0);
                         glTranslatef(0.0, 0.5, 0.0);
@@ -270,8 +271,26 @@ void display(void)
 
                         glPopMatrix();
 
-                    glPopMatrix();
 
+                        // Movimento do indicador
+                        glPushMatrix();
+
+                            // Ajuste do ponto de origem
+                            glTranslatef(-0.06, 0.5, -0.06);
+                            glRotatef((GLfloat) garraIndicador, 0.0, 0.0, 1.0);
+                            glTranslatef(0.0, 0.2, 0.0);
+
+                            // Indicador
+                            glPushMatrix();
+                                glRotatef(90, 0, 0, 1.0);
+                                glScalef(2.0, 0.4, 0.4);
+                                glColor3f(0.0, 0.0, 0.0);
+                                glutWireCube(0.2);
+                            glPopMatrix();
+
+                        glPopMatrix();
+
+                    glPopMatrix();
                 glPopMatrix();
         glPopMatrix();
     glPopMatrix();
