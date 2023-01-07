@@ -91,19 +91,19 @@ void keyboard(unsigned char key, int x, int y)
 
         // lowerCase = sentido horario
         // upperCase = sentido anti-horario
-        case 'o':          ombro = (ombro - 5) % 360;               break;
-        case 'O':          ombro = (ombro + 5) % 360;               break;
-        case 'c':       cotovelo = (cotovelo - 5) % 360;            break;
-        case 'C':       cotovelo = (cotovelo + 5) % 360;            break;
-        case 'm':            mao = (mao - 5) % 360;                 break;
-        case 'M':            mao = (mao + 5) % 360;                 break;
+        case 'o':          ombro = (ombro - 5) % 120;               break;
+        case 'O':          ombro = (ombro + 5) % 120;               break;
+        case 'c':       cotovelo = (cotovelo - 5) % 120;            break;
+        case 'C':       cotovelo = (cotovelo + 5) % 120;            break;
+        case 'm':            mao = (mao - 5) % 120;                 break;
+        case 'M':            mao = (mao + 5) % 120;                 break;
 
-        case 'i': garraIndicador = (garraIndicador) - 5 % 360;      break;
-        case 'I': garraIndicador = (garraIndicador) + 5 % 360;      break;
-        case 'p':   garraPolegar = (garraPolegar) - 5 % 360;        break;
-        case 'P':   garraPolegar = (garraPolegar) + 5 % 360;        break;
-        case 'a':    garraAnelar = (garraAnelar) - 5 % 360;         break;
-        case 'A':    garraAnelar = (garraAnelar) + 5 % 360;         break;
+        case 'i': garraIndicador = (garraIndicador - 5) % 120;      break;
+        case 'I': garraIndicador = (garraIndicador + 5) % 120;      break;
+        case 'p':   garraPolegar = (garraPolegar - 5) % 120;        break;
+        case 'P':   garraPolegar = (garraPolegar + 5) % 120;        break;
+        case 'a':    garraAnelar = (garraAnelar - 5) % 120;         break;
+        case 'A':    garraAnelar = (garraAnelar + 5) % 120;         break;
 
         case 'y':     rotacaoDDD = (rotacaoDDD - 5) % 360;          break;
         case 'Y':     rotacaoDDD = (rotacaoDDD + 5) % 360;          break;
