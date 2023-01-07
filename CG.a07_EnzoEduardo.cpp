@@ -35,7 +35,9 @@
 /*
  * Declaracao de constantes e variaveis
  */
-static int ombro = 0, cotovelo = 0, mao = 0, rotacaoDDD = 0;
+static int rotacaoDDD = 0;
+static int ombro = 0, cotovelo = 0, mao = 0;
+static int garraIndicador = 0, garraPolegar = 0, garraAnelar = 0;
 
 
 /*
@@ -86,16 +88,25 @@ void init(void)
 void keyboard(unsigned char key, int x, int y) 
 {
     switch (key) {
-        case 'o': ombro = (ombro - 5) % 360; break;         // Sentido horario
-        case 'O': ombro = (ombro + 5) % 360; break;         // Sentido anti-horario
-        case 'c': cotovelo = (cotovelo - 5) % 360; break;   // Sentido horario
-        case 'C': cotovelo = (cotovelo + 5) % 360; break;   // Sentido anti-horario
+        // lowerCase = sentido horario
+        // upperCase = sentido anti-horario
 
-        case 'm': mao = (mao - 5) % 360; break;
-        case 'M': mao = (mao + 5) % 360; break;
+        case 'o':          ombro = (ombro - 5) % 360;               break;
+        case 'O':          ombro = (ombro + 5) % 360;               break;
+        case 'c':       cotovelo = (cotovelo - 5) % 360;            break;
+        case 'C':       cotovelo = (cotovelo + 5) % 360;            break;
+        case 'm':            mao = (mao - 5) % 360;                 break;
+        case 'M':            mao = (mao + 5) % 360;                 break;
 
-        case 'y': rotacaoDDD = (rotacaoDDD - 5) % 360; break;
-        case 'Y': rotacaoDDD = (rotacaoDDD + 5) % 360; break;
+        case 'i': garraIndicador = (garraIndicador) - 5 % 360;      break;
+        case 'I': garraIndicador = (garraIndicador) + 5 % 360;      break;
+        case 'p':   garraPolegar = (garraPolegar) - 5 % 360;        break;
+        case 'P':   garraPolegar = (garraPolegar) + 5 % 360;        break;
+        case 'a':    garraAnelar = (garraAnelar) - 5 % 360;         break;
+        case 'A':    garraAnelar = (garraAnelar) + 5 % 360;         break;
+
+        case 'y':     rotacaoDDD = (rotacaoDDD - 5) % 360;          break;
+        case 'Y':     rotacaoDDD = (rotacaoDDD + 5) % 360;          break;
 
         case ESC: exit(EXIT_SUCCESS); break;                // Sai do programa
     }
@@ -219,6 +230,25 @@ void display(void)
                             glScalef(2.0, 0.4, 0.4);
                             glColor3f(0.0, 0.0, 0.0);
                             glutWireCube(0.5);
+                        glPopMatrix();
+
+
+                        // Movimento do polegar
+                        glPushMatrix();
+
+                            // Ajuste do ponto de origem
+                            glTranslatef(0.06, 0.5, 0.0);
+                            glRotatef((GLfloat) garraPolegar, 0.0, 0.0, 1.0);
+                            glTranslatef(0.0, 0.2, 0.0);
+
+                            // Polegar
+                            glPushMatrix();
+                                glRotatef(90, 0, 0, 1.0);
+                                glScalef(2.0, 0.4, 0.4);
+                                glColor3f(0.0, 0.0, 0.0);
+                                glutWireCube(0.2);
+                            glPopMatrix();
+
                         glPopMatrix();
 
                     glPopMatrix();
