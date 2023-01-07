@@ -251,12 +251,29 @@ void display(void)
 
                         glPopMatrix();
 
+
+                        // Movimento do anelar
+                        glPushMatrix();
+
+                            // Ajuste do ponto de origem
+                            glTranslatef(-0.06, 0.5, 0.06);
+                            glRotatef((GLfloat) garraAnelar, 0.0, 0.0, 1.0);
+                            glTranslatef(0.0, 0.2, 0.0);
+
+                            // Anelar
+                            glPushMatrix();
+                                glRotatef(90, 0, 0, 1.0);
+                                glScalef(2.0, 0.4, 0.4);
+                                glColor3f(0.0, 0.0, 0.0);
+                                glutWireCube(0.2);
+                            glPopMatrix();
+
+                        glPopMatrix();
+
                     glPopMatrix();
 
                 glPopMatrix();
-
         glPopMatrix();
-
     glPopMatrix();
 
 
