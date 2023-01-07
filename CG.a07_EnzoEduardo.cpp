@@ -11,12 +11,12 @@
 
 
 // Bibliotecas utilizadas pelo OpenGL
-#ifdef __APPLE__
+#ifdef __APPLE__                        // Mac OS
     #define GL_SILENCE_DEPRECATION
     #include <GLUT/glut.h>
     #include <OpenGL/gl.h>
     #include <OpenGL/glu.h>
-#else
+#else                                   // Windows/Linux
     #include <GL/glut.h>
     #include <GL/gl.h>
     #include <GL/glu.h>
@@ -35,7 +35,7 @@
 /*
  * Declaracao de constantes e variaveis
  */
-static int ombro = 0, cotovelo = 0;
+static int ombro = 0, cotovelo = 0, mao = 0, rotacaoDDD = 0;
 
 
 /*
@@ -90,6 +90,13 @@ void keyboard(unsigned char key, int x, int y)
         case 'O': ombro = (ombro + 5) % 360; break;         // Sentido anti-horario
         case 'c': cotovelo = (cotovelo - 5) % 360; break;   // Sentido horario
         case 'C': cotovelo = (cotovelo + 5) % 360; break;   // Sentido anti-horario
+
+        case 'm': mao = (mao - 5) % 360; break;
+        case 'M': mao = (mao + 5) % 360; break;
+
+        case 'y': rotacaoDDD = (rotacaoDDD - 5) % 360; break;
+        case 'Y': rotacaoDDD = (rotacaoDDD + 5) % 360; break;
+
         case ESC: exit(EXIT_SUCCESS); break;                // Sai do programa
     }
 
@@ -111,9 +118,9 @@ void reshape(int w, int h)
     // (angulo, aspecto, ponto_proximo, ponto distante)
     gluPerspective(60, (float)w/(float)h , 1.0, 11.0);
 
-    gluLookAt(0.0, 0.0, 7.0,  // posicao da camera (olho)
-              0.0, 1.0, 0.0,  // direcao da camera (geralmente para centro da cena)
-              0.0, 1.0, 0.0); // sentido ou orientacao da camera (de cabeca para cima)
+    gluLookAt(0.0, 0.0, 7.0,  // Posicao da camera
+              0.0, 1.0, 0.0,  // Direcao da camera                <<<< |=| >>>>
+              0.0, 1.0, 0.0); // Sentido ou orientacao da camera  ^^^^ |=| vvvv
 }
 
 
@@ -127,13 +134,18 @@ void display(void)
 
     
     // Braco robotico
+    glPushMatrix();
+
+        // Rotacao 3D
+        glRotatef((GLfloat) rotacaoDDD, 0.0, 1.0, 0.0);
+
 
         // Base
         glPushMatrix();
             glTranslatef(0.0, -2.0, 0.0);
             glRotatef(-90, 1, 0, 0);
             glColor3f(0.0, 0.0, 0.0);
-            glutWireCone(1.0, 1.0, 30, 30); // base, altura, fatias, pilhas
+            glutWireCone(1.0, 1.0, 30, 30);
         glPopMatrix();
 
     
@@ -141,7 +153,7 @@ void display(void)
         glPushMatrix();
             glTranslatef(0.0, -1.0, 0.0);
             glColor3f(0.0, 0.0, 0.0);
-            glutWireSphere(0.5, 30, 30); // raio, fatias, pilhas
+            glutWireSphere(0.5, 30, 30);
         glPopMatrix();
 
 
@@ -158,14 +170,14 @@ void display(void)
                     glRotatef(90, 0, 0, 1);
                     glScalef (2.0, 0.5, 0.5);
                     glColor3f(0.0,0.0,0.0);
-                    glutWireCube (1.0); // Tamanho
+                    glutWireCube (1.0);
                 glPopMatrix();
 
                 // Cotovelo
                 glPushMatrix();
                     glTranslatef(0.0, 1.0, 0.0);
                     glColor3f(0.0, 0.0, 0.0);
-                    glutWireSphere(0.4, 30, 30); // raio, fatias, pilhas
+                    glutWireSphere(0.4, 30, 30);
                 glPopMatrix();
 
 
@@ -182,14 +194,40 @@ void display(void)
                         glRotatef(90, 0, 0, 1);
                         glScalef(2.0, 0.4, 0.4);
                         glColor3f(0.0, 0.0, 0.0);
-                        glutWireCube(1.0); // Tamanho
+                        glutWireCube(1.0);
+                    glPopMatrix();
+
+                    // Pulso
+                    glPushMatrix();
+                        glTranslatef(0.0, 1.0, 0.0);
+                        glColor3f(0.0, 0.0, 0.0);
+                        glutWireSphere(0.3, 30, 30);
+                    glPopMatrix();
+
+
+                    // Movimento da mao
+                    glPushMatrix();
+
+                        // Ajuste do ponto de origem da mao
+                        glTranslatef(0.0, 1.0, 0.0);
+                        glRotatef((GLfloat) mao, 0.0, 0.0, 1.0);
+                        glTranslatef(0.0, 0.5, 0.0);
+
+                        // Mao
+                        glPushMatrix();
+                            glRotatef(90, 0, 0, 1.0);
+                            glScalef(2.0, 0.4, 0.4);
+                            glColor3f(0.0, 0.0, 0.0);
+                            glutWireCube(0.5);
+                        glPopMatrix();
+
                     glPopMatrix();
 
                 glPopMatrix();
 
-
-        // origem volta para o sistema de coordenadas original
         glPopMatrix();
+
+    glPopMatrix();
 
 
     // Troca os buffers, mostrando o que acabou de ser desenhado
