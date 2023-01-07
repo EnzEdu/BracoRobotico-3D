@@ -156,16 +156,16 @@ void display(void)
         glPushMatrix();
             glTranslatef(0.0, -2.0, 0.0);
             glRotatef(-90, 1, 0, 0);
-            glColor3f(0.0, 0.0, 0.0);
-            glutWireCone(1.0, 1.0, 30, 30);
+            glColor3f(0.33, 0.33, 0.33);
+            glutSolidCone(1.0, 1.0, 30, 30);
         glPopMatrix();
 
     
         // Ombro
         glPushMatrix();
             glTranslatef(0.0, -1.0, 0.0);
-            glColor3f(0.0, 0.0, 0.0);
-            glutWireSphere(0.5, 30, 30);
+            glColor3f(0.33, 0.33, 0.33);
+            glutSolidSphere(0.5, 30, 30);
         glPopMatrix();
 
 
@@ -181,15 +181,15 @@ void display(void)
                 glPushMatrix();
                     glRotatef(90, 0, 0, 1);
                     glScalef (2.0, 0.5, 0.5);
-                    glColor3f(0.0,0.0,0.0);
-                    glutWireCube (1.0);
+                    glColor3f(1.0, 1.0, 0.0);
+                    glutSolidCube(1.0);
                 glPopMatrix();
 
                 // Cotovelo
                 glPushMatrix();
                     glTranslatef(0.0, 1.0, 0.0);
-                    glColor3f(0.0, 0.0, 0.0);
-                    glutWireSphere(0.4, 30, 30);
+                    glColor3f(0.33, 0.33, 0.33);
+                    glutSolidSphere(0.4, 30, 30);
                 glPopMatrix();
 
 
@@ -205,15 +205,15 @@ void display(void)
                     glPushMatrix();
                         glRotatef(90, 0, 0, 1);
                         glScalef(2.0, 0.4, 0.4);
-                        glColor3f(0.0, 0.0, 0.0);
-                        glutWireCube(1.0);
+                        glColor3f(1.0, 1.0, 0.0);
+                        glutSolidCube(1.0);
                     glPopMatrix();
 
                     // Pulso
                     glPushMatrix();
                         glTranslatef(0.0, 1.0, 0.0);
-                        glColor3f(0.0, 0.0, 0.0);
-                        glutWireSphere(0.3, 30, 30);
+                        glColor3f(0.33, 0.33, 0.33);
+                        glutSolidSphere(0.3, 30, 30);
                     glPopMatrix();
 
 
@@ -229,8 +229,8 @@ void display(void)
                         glPushMatrix();
                             glRotatef(90, 0, 0, 1.0);
                             glScalef(2.0, 0.4, 0.4);
-                            glColor3f(0.0, 0.0, 0.0);
-                            glutWireCube(0.5);
+                            glColor3f(0.53, 0.53, 0.53);
+                            glutSolidCube(0.5);
                         glPopMatrix();
 
 
@@ -247,7 +247,7 @@ void display(void)
                                 glRotatef(90, 0, 0, 1.0);
                                 glScalef(2.0, 0.4, 0.4);
                                 glColor3f(0.0, 0.0, 0.0);
-                                glutWireCube(0.2);
+                                glutSolidCube(0.2);
                             glPopMatrix();
 
                         glPopMatrix();
@@ -266,7 +266,7 @@ void display(void)
                                 glRotatef(90, 0, 0, 1.0);
                                 glScalef(2.0, 0.4, 0.4);
                                 glColor3f(0.0, 0.0, 0.0);
-                                glutWireCube(0.2);
+                                glutSolidCube(0.2);
                             glPopMatrix();
 
                         glPopMatrix();
@@ -285,7 +285,7 @@ void display(void)
                                 glRotatef(90, 0, 0, 1.0);
                                 glScalef(2.0, 0.4, 0.4);
                                 glColor3f(0.0, 0.0, 0.0);
-                                glutWireCube(0.2);
+                                glutSolidCube(0.2);
                             glPopMatrix();
 
                         glPopMatrix();
